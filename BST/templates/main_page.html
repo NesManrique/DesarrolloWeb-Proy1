@@ -2,12 +2,12 @@
    {% block title %}Bienvenido al BST{% endblock %}
    {% block head %}Bienvenido al BST{% endblock %}
    {% block content %}
-     {% if user.username %}
-       <p>Bienvenido {{ user.username }}!</p>
-     {% else %}
+   {% if user.username %}
+        Estas logeado {{ user.username }}
+   {% else %}
        <p>Bienvenido anonymous !
          Tienes que hacer <a href="/login/">login</a>
          para entrar al BST.</p>
-     {% endif %}
+   {% endif %}
 {% endblock %}
 

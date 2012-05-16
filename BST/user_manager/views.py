@@ -30,8 +30,8 @@ def user_logout(request):
     return HttpResponseRedirect('/')
 
 def register_page(request):
-    if request.method == 'POST':
-        form =  RegistrationForm(request.POST)
+    if request.method == 'POST': # Si el form ha sido presentado
+        form =  RegistrationForm(request.POST) # un formulario dependiente de los datos del POST
         if form.is_valid():
             user = User.objects.create_user(
                 username = form.cleaned_data['username'],
@@ -40,7 +40,7 @@ def register_page(request):
             )
             return HttpResponseRedirect('/registro/exitoso/')
     else:
-        form = RegistrationForm()
+        form = RegistrationForm() 
     
     variables = RequestContext(request, {
         'form': form
