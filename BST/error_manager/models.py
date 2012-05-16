@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class error(models.Model):
+class Error(models.Model):
     estado = models.CharField( max_length = 15)
     duplicado = models.ForeignKey('self', null=True)
     prioridad = models.IntegerField()
@@ -12,6 +12,8 @@ class error(models.Model):
     fecha_modif = models.DateTimeField(auto_now = True, null = True)
     usuario_encargado = models.ForeignKey(User, related_name = 'encargado', null=True)
     info_duplicacion = models.TextField()
-    
+   
+    def __unicode__(self):
+        return self.estado 
     
     
