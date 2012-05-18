@@ -18,9 +18,12 @@ def user_page(request, username):
         user = User.objects.get(username=username)  
     except User.DoesNotExist:
         raise Http404(u'User not found')
-    
+
+    errors = user.reportero.all()
+        
     variables = RequestContext(request, {
         'username': username,
+        'errors': errors
     })
 
     return render_to_response('user_page.html', variables)
