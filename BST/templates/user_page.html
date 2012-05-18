@@ -1,3 +1,15 @@
 {% extends "base.html" %}
 {% block title %}Bienvenido{{ username }}{% endblock %} 
 {% block head %}Cuenta de {{ username }}{% endblock %}
+{% block content %}
+{% if errors %}
+    <ul>
+        {% for error in errors %}
+          <p> {{ error.id }} Error encontrado para {{ error.usuario_encargado }}
+          </p>
+        {% endfor %}
+    </ul>
+{% else %}
+    No hay errores
+{% endif %}
+{% endblock %}
