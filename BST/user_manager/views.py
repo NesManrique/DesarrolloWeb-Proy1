@@ -1,6 +1,7 @@
 # Create your views here.
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 from django.template import Context
 from django.template.loader import get_template
 from django.contrib.auth.models import User
@@ -13,11 +14,21 @@ def main_page(request):
         'main_page.html', RequestContext(request)
     )
 
+@login_required
+def users(request):
+    url = '/users/%s/' % request.user.username
+    return HttpResponseRedirect(url)
+
+@login_required
 def user_page(request, username):
     try:
         user = User.objects.get(username=username)  
     except User.DoesNotExist:
         raise Http404(u'User not found')
+
+    if(username != request.user.username):
+        url = '/users/%s/' % request.user.username
+        return HttpResponseRedirect(url)
 
     errors = user.reportero.all()
         

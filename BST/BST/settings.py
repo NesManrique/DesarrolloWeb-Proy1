@@ -109,7 +109,8 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "/Users/samuelbartoli/USB/herramientas web/DesarrolloWeb-Proy1/BST/templates" 
+    "/media/HonDa/Documents/Trabajos/USB/Abril-Julio2012/DesarrolloWeb/DesarrolloWeb-Proy1/BST/templates"
+ 
 )
 
 INSTALLED_APPS = (
@@ -126,6 +127,10 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
+
+LOGIN_URL = '/login/'
+
+LOGIN_REDIRECT_URL = '/users/'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -155,3 +160,4 @@ LOGGING = {
         },
     }
 }
+
