@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Error(models.Model):
+    titulo = models.CharField( max_length = 20)
     estado = models.CharField( max_length = 15)
     duplicado = models.ForeignKey('self', null=True)
     prioridad = models.IntegerField()

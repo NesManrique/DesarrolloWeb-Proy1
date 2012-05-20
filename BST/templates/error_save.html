@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %} Registrar Error {% endblock %}
+{% block head %} Registrar Error {% endblock %}
+{% block content %}
+<form method="post" action=".">
+{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="registrar" />
+</form>
+{% endblock %}
