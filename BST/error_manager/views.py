@@ -16,7 +16,7 @@ def error_save(request):
                 duplicado = None,
                 prioridad = form.cleaned_data['prioridad'],
                 usuario_reporte = request.user,
-                usuario_encargado = request.user,
+                usuario_encargado = None,
                 info_duplicacion = 'prueba'
             )
             return HttpResponse('/users/%s/' % request.user.username)

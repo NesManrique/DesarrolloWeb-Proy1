@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %} Detalle de Error {% endblock %}
+{% block head %} Error #{{ error.id }} : {{ error.titulo }} {% endblock %}
+{% block content %}
+
+    <div id="info">
+           <p>Estado: {{ error.estado }}</p> 
+           <p>Prioridad: {{ error.prioridad }}</p> 
+           <p>Reportado por: {{ error.usuario_reporte }}</p> 
+           <p>Fecha de Reporte: {{ error.fecha_reporte }}</p>
+
+            {% if error.usuario_encargado == None %}
+           <p>Usuario Encargado: No posee</p> 
+            {% else %}
+           <p>Usuario Encargado: {{ error.usuario_encargado }}</p> 
+            {% endif %}
+
+            {% if user|in_group:"gatekeepers" %}
+            {% endif %}
+
+           <p>Ultima modificacion: {{ error.fecha_modif }}</p> 
+           <p> </p> 
+           <p> </p> 
+    </div>
+
+    {% load comments %} 
+    <div id="coments">
+    </div>
+
+    <div id="mkcoments">
+    </div> 
+    
+{% endblock %}

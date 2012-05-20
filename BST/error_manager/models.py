@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Error(models.Model):
-    titulo = models.CharField( max_length = 20)
-    estado = models.CharField( max_length = 15)
+    titulo = models.CharField(max_length = 20)
+    estado = models.CharField(max_length = 15)
     duplicado = models.ForeignKey('self', null=True)
     prioridad = models.IntegerField()
     fecha_reporte = models.DateTimeField(auto_now_add = True) 
@@ -15,6 +15,6 @@ class Error(models.Model):
     info_duplicacion = models.TextField()
    
     def __unicode__(self):
-        return self.estado 
+        return self.titulo 
     
     

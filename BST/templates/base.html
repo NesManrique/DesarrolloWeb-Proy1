@@ -10,10 +10,10 @@
         <div id="nav">
             <a href="/">home</a> | 
             {% if user.is_authenticated %}
-                bienvenido {{ user.username }}
-                (<a href="/logout">logout</a>)
+                Bienvenido {{ user.username }}
+                (<a href="/logout">Logout</a>)
             {% else %}
-                <a href="/login/">login</a>
+                <a href="/login/">Login</a>
             {% endif %}
         </div>
         {% if user.is_staff %}
