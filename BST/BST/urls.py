@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.conf.urls.defaults import *
 from user_manager.views import *
+from error_manager.views import *
 from django.views.generic.simple import direct_to_template
 
 # Uncomment the next two lines to enable the admin:
@@ -18,6 +19,7 @@ urlpatterns = patterns('',
     (r'^logout/$', user_logout),
     (r'^registro/$', register_page),
     (r'^registro/exitoso/$', direct_to_template, {'template': 'registration/registro_exitoso.html'}),
+    (r'^save/$', error_save),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
