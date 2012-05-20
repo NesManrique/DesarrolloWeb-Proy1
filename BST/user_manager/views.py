@@ -16,7 +16,8 @@ def main_page(request):
 
 @login_required
 def users(request):
-    url = '/users/%s/' % request.user.username
+    username = request.user.username
+    url = '/users/%s/' % username
     return HttpResponseRedirect(url)
 
 @login_required
