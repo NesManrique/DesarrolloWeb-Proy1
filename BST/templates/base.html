@@ -8,12 +8,12 @@
     </head>
     <body>
         <div id="nav">
-            <a href="/">home</a> | 
+            <a href="/">Home</a> | 
             {% if user.is_authenticated %}
                 Bienvenido {{ user.username }}
-                (<a href="/logout">Logout</a>)
+                (<a href="/users/logout">Logout</a>)
             {% else %}
-                <a href="/login/">Login</a>
+                <a href="/users/login/">Login</a>
             {% endif %}
         </div>
         {% if user.is_staff %}

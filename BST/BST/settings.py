@@ -129,7 +129,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 )
 
-LOGIN_URL = '/login/'
+LOGIN_URL = '/users/login/'
 
 LOGIN_REDIRECT_URL = '/users/'
 

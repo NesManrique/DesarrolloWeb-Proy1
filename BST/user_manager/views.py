@@ -1,10 +1,11 @@
 # Create your views here.
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.contrib.auth import logout
+from django.contrib.auth.views import logout, login
 from django.contrib.auth.decorators import login_required
 from django.template import Context
 from django.template.loader import get_template
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from user_manager.forms import *
@@ -13,6 +14,16 @@ def main_page(request):
     return render_to_response(
         'main_page.html', RequestContext(request)
     )
+
+def user_login(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('user_page'))
+    else:
+        return login(request)
+
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
 @login_required
 def users(request):
@@ -40,10 +51,6 @@ def user_page(request, username):
 
     return render_to_response('user_page.html', variables)
 
-def user_logout(request):
-    logout(request)
-    return HttpResponseRedirect('/')
-
 def register_page(request):
     if request.method == 'POST': # Si el form ha sido presentado
         form =  RegistrationForm(request.POST) # un formulario dependiente de los datos del POST
@@ -53,7 +60,7 @@ def register_page(request):
                 password = form.cleaned_data['password1'],
                 email = form.cleaned_data['email']
             )
-            return HttpResponseRedirect('/registro/exitoso/')
+            return HttpResponseRedirect('users/registro/exitoso/')
     else:
         form = RegistrationForm() 
     
@@ -62,7 +69,7 @@ def register_page(request):
     })
     
     return render_to_response(
-        'registration/register.html',
+        'users/registration/register.html',
         variables
     )
 
