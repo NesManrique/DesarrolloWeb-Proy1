@@ -3,7 +3,6 @@ from django.conf.urls.defaults import *
 from user_manager.views import *
 from error_manager.views import *
 from error_manager.models import Error
-from django.views.generic import DetailView
 from django.views.generic.simple import direct_to_template
 from django.utils.encoding import force_unicode
 
@@ -16,12 +15,7 @@ from user_manager import in_group_snippet
 urlpatterns = patterns('',
     url(r'^$', main_page, name="main_page"),
     url(r'^users/',include('user_manager.urls')),
-    url(r'^save/$', error_save, name="save_error"),
-    url(r'^error/(?P<pk>\d+)/$',
-        DetailView.as_view(
-            model=Error,
-            template_name='error_detail.html'),
-            name="error_detail"),
+    url(r'^errors/',include('error_manager.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

@@ -5,6 +5,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 from error_manager.models import Error
 from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.contrib.comments.models import Comment
 
 def error_save(request):
     if request.method == 'POST':

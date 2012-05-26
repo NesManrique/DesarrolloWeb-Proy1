@@ -11,9 +11,9 @@
             <a href="/">Home</a> | 
             {% if user.is_authenticated %}
                 Bienvenido {{ user.username }}
-                (<a href="/users/logout">Logout</a>)
+                (<a href="{% url logout %}">Logout</a>)
             {% else %}
-                <a href="/users/login/">Login</a>
+                <a href="{% url login %}">Login</a>
             {% endif %}
         </div>
         {% if user.is_staff %}

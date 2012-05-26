@@ -12,7 +12,7 @@
             <p><label for="id_password">Password:</label>
                 {{ form.password }}</p>
             <input type="submit" value="Login" />
-            <li><a href="/registro/">Registro</a></li>
             <input type="hidden" name="next" value="{% url user_page %}"/>
         </form>
+            <li><a href="/users/registro/">Registro</a></li>
     {% endblock %}

@@ -6,7 +6,7 @@ urlpatterns = patterns('user_manager.views',
     url(r'^$', users, name="user_page"),
     url(r'^logout/$', user_logout, name="logout"),
     url(r'^login/$', user_login, name="login"),
-    url(r'^(\w+)/$', user_page),
     url(r'^registro/$', register_page),
     url(r'^registro/exitoso/$', direct_to_template, {'template': 'registration/registro_exitoso.html'}),
+    url(r'^(\w+)/$', user_page),
 )

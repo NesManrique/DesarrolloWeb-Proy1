@@ -5,7 +5,9 @@
 {% if errors %}
     <ul>
         {% for error in errors %}
-          <p> {{ error.id }} Error encontrado para {{ error.usuario_encargado }}
+          <p> 
+                <a href="{% url error_detail error.id %}">{{ error.id }}</a> 
+                Error encontrado para {{ error.usuario_encargado }}
           </p>
         {% endfor %}
     </ul>
