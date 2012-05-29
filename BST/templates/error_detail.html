@@ -1,5 +1,15 @@
 {% extends "base.html" %}
 {% block title %} Detalle de Error {% endblock %}
+{% block javascript %}
+        <script type="text/javascript">
+            $(function() {
+                $("#lookuser").autocomplete({
+                    source: "{% url get_users %}",
+                    minLength: 2,
+                });
+            });
+        </script>
+{% endblock %}
 {% block head %} Error #{{ error.id }} : {{ error.titulo }} {% endblock %}
 {% block content %}
 
@@ -16,11 +26,11 @@
             {% endif %}
 
             {% if user|in_group:"gatekeepers" %}
+            <label for="lookuser">Elegir usuario: </label>
+            <input type="text" id="lookuser" name="lookuser"/>
             {% endif %}
 
            <p>Ultima modificacion: {{ error.fecha_modif }}</p> 
-           <p> </p> 
-           <p> </p> 
     </div>
 
     {% load comments %} 

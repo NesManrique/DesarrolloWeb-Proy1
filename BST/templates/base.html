@@ -2,12 +2,21 @@
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>
            BST - {% block title %}{% endblock %}
         </title>
+
+        <link type="text/css" href="{{ MEDIA_URL }}js/css/smoothness/jquery-ui-1.8.20.custom.css" rel="Stylesheet" />  
+        <script type="text/javascript" src="{{ MEDIA_URL }}js/js/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="{{ MEDIA_URL }}js/js/jquery-ui-1.8.20.custom.min.js"></script>
+
+        {% block javascript %}{% endblock %}
+
     </head>
     <body>
         <div id="nav">
+            <!--button id="cl">Click Me</button-->
             <a href="/">Home</a> | 
             {% if user.is_authenticated %}
                 Bienvenido {{ user.username }}

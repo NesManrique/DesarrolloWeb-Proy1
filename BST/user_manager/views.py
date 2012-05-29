@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.utils import simplejson
 from user_manager.forms import *
 
 def main_page(request):
@@ -73,5 +74,21 @@ def register_page(request):
         'registration/register.html',
         variables
     )
-
  
+def user_lookup(request):
+    if request.is_ajax():
+        q = request.GET.get('term', '')
+        users = User.objects.filter(username__icontains = q )[:20]
+        results = []
+        for user in users:
+            user_json = {}
+            user_json['label'] = user.username
+            user_json['value'] = user.username
+            results.append(user_json)
+        data = simplejson.dumps(results)
+    else:
+        data = 'fail'
+
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
+

@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response
 from error_manager.models import Error
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.contrib.comments.models import Comment
+from django.utils import simplejson
 
 def error_save(request):
     if request.method == 'POST':
@@ -26,10 +27,8 @@ def error_save(request):
         
     variables = RequestContext(request, {'form': form })
     return render_to_response('error_save.html', variables)
-                
-                
-                    
-            
 
-        
-    
+
+#def asignar_enc(request, error):
+#    if request.method == 'POST':
+#        err = Error.objects.get(id = error.id)
