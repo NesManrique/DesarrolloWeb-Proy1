@@ -1,6 +1,6 @@
 # Create your views here.
 from django.contrib.auth.models import User
-from user_manager.forms import *
+from error_manager.forms import *
 from django.template import RequestContext
 from django.shortcuts import render_to_response, get_object_or_404
 from error_manager.models import Error
@@ -15,12 +15,8 @@ def error_save(request):
         if form.is_valid():
             error, created = Error.objects.get_or_create(
                 titulo = form.cleaned_data['titulo'],
-                estado = form.cleaned_data['estado'],
-                duplicado = None,
                 prioridad = form.cleaned_data['prioridad'],
                 usuario_reporte = request.user,
-                usuario_encargado = None,
-                info_duplicacion = 'prueba'
             )
             return HttpResponseRedirect(reverse("user_page"))
     else:
@@ -35,5 +31,14 @@ def asignar_enc(request, error_id):
         usuario = request.POST["lookuser"]
         err = get_object_or_404(Error, id=error_id)
         err.usuario_encargado_id = User.objects.get(username = usuario)
+        err.estado = 'Asignado'
+        err.save()
+    return HttpResponseRedirect(reverse("error_detail", args=(error_id,)))
+
+def asignar_estado(request, error_id):
+    if request.method == 'POST':
+        estado = request.POST["estado"]
+        err = get_object_or_404(Error, id=error_id)
+        err.estado = estado
         err.save()
     return HttpResponseRedirect(reverse("error_detail", args=(error_id,)))

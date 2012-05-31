@@ -11,4 +11,5 @@ urlpatterns = patterns('error_manager.views',
             template_name='error_detail.html'),
             name="error_detail"),
     url(r'^(?P<error_id>\d+)/up_encargado/$', asignar_enc, name="up_encargado"),
+    url(r'^(?P<error_id>\d+)/up_estado/$', asignar_estado, name="up_estado")
 )

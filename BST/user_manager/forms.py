@@ -15,22 +15,6 @@ class RegistrationForm(forms.Form):
         widget = forms.PasswordInput()
     )
 
-class ErrorSaveForm(forms.Form):
-    titulo = forms.CharField(
-        label = u'Titulo', 
-        widget = forms.TextInput(attrs={'size':64})
-    )
-
-    estado = forms.CharField(
-        label = u'Estado',
-        widget = forms.TextInput(attrs={'size':20})
-    )
-
-    prioridad = forms.IntegerField(
-        label = u'Prioridad'
-    )    
-
-
 def clean_password2(self):
     if 'password1' in self.cleaned_data:
         password1 = self.cleaned_data['password1']
