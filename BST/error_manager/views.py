@@ -2,11 +2,12 @@
 from django.contrib.auth.models import User
 from user_manager.forms import *
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, get_object_or_404
 from error_manager.models import Error
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.contrib.comments.models import Comment
-from django.utils import simplejson
+from django.core.urlresolvers import reverse
+from django.utils.simplejson import dumps
 
 def error_save(request):
     if request.method == 'POST':
@@ -21,7 +22,7 @@ def error_save(request):
                 usuario_encargado = None,
                 info_duplicacion = 'prueba'
             )
-            return HttpResponse('/users/%s/' % request.user.username)
+            return HttpResponseRedirect(reverse("user_page"))
     else:
         form = ErrorSaveForm()
         
@@ -29,6 +30,10 @@ def error_save(request):
     return render_to_response('error_save.html', variables)
 
 
-#def asignar_enc(request, error):
-#    if request.method == 'POST':
-#        err = Error.objects.get(id = error.id)
+def asignar_enc(request, error_id):
+    if request.method == 'POST':
+        usuario = request.POST["lookuser"]
+        err = get_object_or_404(Error, id=error_id)
+        err.usuario_encargado_id = User.objects.get(username = usuario)
+        err.save()
+    return HttpResponseRedirect(reverse("error_detail", args=(error_id,)))

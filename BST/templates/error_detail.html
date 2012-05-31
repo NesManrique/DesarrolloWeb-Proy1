@@ -26,8 +26,11 @@
             {% endif %}
 
             {% if user|in_group:"gatekeepers" %}
-            <label for="lookuser">Elegir usuario: </label>
-            <input type="text" id="lookuser" name="lookuser"/>
+            <form action="{% url up_encargado error.id %}" method="post" >
+                {% csrf_token %}
+                <label for="lookuser">Elegir usuario: </label>
+                <input type="text" id="lookuser" name="lookuser"/>
+            </form>
             {% endif %}
 
            <p>Ultima modificacion: {{ error.fecha_modif }}</p> 

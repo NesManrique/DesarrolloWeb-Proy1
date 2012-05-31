@@ -10,4 +10,5 @@ urlpatterns = patterns('error_manager.views',
             model=Error,
             template_name='error_detail.html'),
             name="error_detail"),
+    url(r'^(?P<error_id>\d+)/up_encargado/$', asignar_enc, name="up_encargado"),
 )

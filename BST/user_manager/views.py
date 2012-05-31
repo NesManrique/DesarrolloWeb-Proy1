@@ -53,7 +53,6 @@ def user_page(request, username):
     return render_to_response('user_page.html', variables)
 
 def register_page(request):
-    print "hola"
     if request.method == 'POST': # Si el form ha sido presentado
         form =  RegistrationForm(request.POST) # un formulario dependiente de los datos del POST
         if form.is_valid():
