@@ -1,5 +1,18 @@
 {% extends "base.html" %}
 {% block title %} Detalle de Error {% endblock %}
+{% block javascript %}
+        <script type="text/javascript">
+            $(function() {
+                $("#lookuser").autocomplete({
+                    source: "{% url get_users %}",
+                    minLength: 2,
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+        </script>
+{% endblock %}
 {% block head %} Error #{{ error.id }} : {{ error.titulo }} {% endblock %}
 {% block content %}
 
@@ -16,18 +29,47 @@
             {% endif %}
 
             {% if user|in_group:"gatekeepers" %}
+            <form action="{% url up_encargado error.id %}" method="post" >
+                {% csrf_token %}
+                <label for="lookuser">Elegir usuario: </label>
+                <input type="text" id="lookuser" name="lookuser"/>
+            </form>
             {% endif %}
 
            <p>Ultima modificacion: {{ error.fecha_modif }}</p> 
-           <p> </p> 
-           <p> </p> 
     </div>
 
     {% load comments %} 
     <div id="coments">
+        <p>_______________________________________________________</p>
+        {% get_comment_count for error as comment_count %}
+        <p>{{ comment_count }} comments have been posted.</p>
+        {% render_comment_list for error %}
+        <p>_______________________________________________________</p>
+        {% get_comment_list for error as comment_list %}
+            {% for comment in comment_list %}
+                <p>Posted by: {{ comment.user_name }} on {{ comment.submit_date }}</p>
+                <p>Comment: {{ comment.comment }}</p>
+            {% endfor %}
     </div>
 
     <div id="mkcoments">
+        <p>_______________________________________________________</p>
+        {% render_comment_form for error %}
+        <p>_______________________________________________________</p>
+        {% get_comment_form for error as form %}
+            <table>
+            <form action="{% comment_form_target %}" method="post">
+                {% csrf_token %}
+                {{ form }}
+                <tr>
+                <td colspan="2">
+                    <input type="submit" name="submit" value="Post">
+                    <input type="submit" name="preview" value="Preview">
+                </td>
+                </tr>
+            </form>
+            </table>
     </div> 
     
 {% endblock %}

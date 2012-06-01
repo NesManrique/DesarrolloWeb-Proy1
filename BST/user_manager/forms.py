@@ -15,7 +15,6 @@ class RegistrationForm(forms.Form):
         widget = forms.PasswordInput()
     )
 
-
     def clean_password2(self):
         if 'password1' in self.cleaned_data:
             password1 = self.cleaned_data['password1']
@@ -65,5 +64,3 @@ class ErrorSaveForm(forms.Form):
         required = False,
         widget = forms.TextInput(attrs={'size':60})
     )
-
-

@@ -5,8 +5,8 @@
    {% if user.username %}
         Estas logeado {{ user.username }}
    {% else %}
-       <p>Bienvenido anonymous !
-         Tienes que hacer <a href="/login/">login</a>
+       <p>Bienvenido anonymous!
+         Tienes que hacer <a href="{% url login %}">Login</a>
          para entrar al BST.</p>
    {% endif %}
 {% endblock %}
