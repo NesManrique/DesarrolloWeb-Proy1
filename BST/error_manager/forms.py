@@ -34,6 +34,7 @@ class ErrorSaveForm(forms.Form):
         max_value=5,
         error_messages=msjs_error_save
     )
+    
     tags = forms.CharField(
         label = u'Tags',
         required = False,
