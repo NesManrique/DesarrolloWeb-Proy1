@@ -34,15 +34,12 @@ class ErrorSaveForm(forms.Form):
         max_value=5,
         error_messages=msjs_error_save
     )
-<<<<<<< HEAD
     
     tags = forms.CharField(
         label = u'Tags',
         required = False,
         widget = forms.TextInput(attrs={'size':60})
     )
-=======
->>>>>>> c46e4913b1141f71ebdfff1c81b48e34effbe4be
 
 class ErrorUpEstado(forms.Form):
     Estado = forms.ChoiceField(
