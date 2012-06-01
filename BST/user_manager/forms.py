@@ -42,25 +42,3 @@ class RegistrationForm(forms.Form):
         except User.DoesNotExist:
             return email
         raise forms.ValidationError('Email ya usado')
-
-
-class ErrorSaveForm(forms.Form):
-    titulo = forms.CharField(
-        label = u'Titulo', 
-        widget = forms.TextInput(attrs={'size':64})
-    )
-
-    estado = forms.CharField(
-        label = u'Estado',
-        widget = forms.TextInput(attrs={'size':20})
-    )
-
-    prioridad = forms.IntegerField(
-        label = u'Prioridad'
-    )    
-
-    tags = forms.CharField(
-        label = u'Tags',
-        required = False,
-        widget = forms.TextInput(attrs={'size':60})
-    )

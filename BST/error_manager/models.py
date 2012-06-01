@@ -39,5 +39,3 @@ class ErrorsListView(ListView):
     def get_queryset(self):
         return Error.objects.all()
 
-    
-    
