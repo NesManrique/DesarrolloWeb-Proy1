@@ -11,31 +11,24 @@
         </script>
 
         <script type="text/javascript">
+        
         </script>
 {% endblock %}
 {% block head %} Error #{{ error.id }} : {{ error.titulo }} {% endblock %}
 {% block content %}
 
     <div id="info">
-            <form method="post" action="{% url up_estado error.id %}">
-                {% csrf_token %}
-                <ul>
-
-{% for choice in form.my_choice_field.field.choices %}
-  <li>
-    <input type="radio" name="Estado" value="{{choice.0}}"
-      {% ifequal form.Estado.data choice.0 %}
-         checked="checked"
-      {% endifequal %}/>
-    <label for="">{{choice.1}}</label>
-  </li>
-{% endfor %}
-</ul>
-                <!--label for="state">Cambiar Estado: </label>
-                <input type="text" id="state" name="state" /-->
-            </form>
-
            <p>Estado: {{ error.estado }}</p> 
+            {% if user.username == error.usuario_encargado or user|in_group:"gatekeepers" %}
+                <form action="{% url up_estado error.id %}" method="post" >
+                    {% csrf_token %}
+                    <input type="radio" name="upestado" value="Asignado" />Asignado
+                    <input type="radio" name="upestado" value="Resuelto" />Resuelto
+                    <input type="radio" name="upestado" value="Duplicado" />Duplicado
+                    <input type="radio" name="upestado" value="Cerrado"/>Cerrado</br>
+                    <input type="submit" value="Actualizar" />
+                </form>
+            {% endif %}
            <p>Prioridad: {{ error.prioridad }}</p> 
            <p>Reportado por: {{ error.usuario_reporte }}</p> 
            <p>Fecha de Reporte: {{ error.fecha_reporte }}</p>

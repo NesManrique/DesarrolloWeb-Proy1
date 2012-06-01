@@ -58,7 +58,7 @@ def register_page(request):
                 password = form.cleaned_data['password1'],
                 email = form.cleaned_data['email']
             )
-            return HttpResponseRedirect('users/registro/exitoso/')
+            return HttpResponseRedirect(reverse('user_page'))
     else:
         form = RegistrationForm() 
     

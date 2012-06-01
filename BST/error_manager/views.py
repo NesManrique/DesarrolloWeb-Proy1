@@ -12,6 +12,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.contrib.comments.models import Comment
 from django.core.urlresolvers import reverse
 from django.utils.simplejson import dumps
+from django.views.generic import DetailView
 
 @login_required
 def error_save(request):
@@ -67,16 +68,9 @@ def asignar_enc(request, error_id):
 
 def asignar_estado(request, error_id):
     if request.method == 'POST':
-        print "entre con post " + error_id
-        form = ErrorUpEstado(request.POST)
-        if form.is_valid():
-            err = get_object_or_404(Error, id=error_id)
-            err.estado = form.cleaned_data['Estado']
-            err.save()
-            return HttpResponseRedirect(reverse("error_detail", args=(error_id,)))
-    else:
-        print "entre con get"
-        form = ErrorUpEstado()
-    
-    variables = RequestContext(request, {'form' : form})
-    return render_to_response('error_detail.html',variables)
+        estado = request.POST['upestado'] 
+        print estado
+        err = get_object_or_404(Error, id=error_id)
+        err.estado = estado
+        err.save()
+        return HttpResponseRedirect(reverse("error_detail", args=(error_id,)))
