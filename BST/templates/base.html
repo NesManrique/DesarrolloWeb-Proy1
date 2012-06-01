@@ -5,15 +5,20 @@
         <title>
            BST - {% block title %}{% endblock %}
         </title>
+        <link type="text/css" href="{{ MEDIA_URL}}js/css/smoothness/jquery-ui-1.8.20.custom.css" rel="Stylesheet" />  
+        <script type="text/javascript" src="{{ MEDIA_URL}}js/js/jquery-1.7.2.min.js"></script>
+        <script type="text/javascript" src="{{ MEDIA_URL}}js/js/jquery-ui-1.8.20.custom.min.js"></script>  
     </head>
     <body>
         <div id="nav">
             <a href="/">home</a> | 
             {% if user.is_authenticated %}
-                Bienvenido {{ user.username }}
-                (<a href="/logout">Logout</a>)
+                <a href="/logout">logout</a> |
+                <a href="/users/{{ user.username }}/">
+                    {{ user.username }}</a>
+                
             {% else %}
-                <a href="/login/">Login</a>
+                <a href="/login/">login</a>
             {% endif %}
         </div>
         {% if user.is_staff %}

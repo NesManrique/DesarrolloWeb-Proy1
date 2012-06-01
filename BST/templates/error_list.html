@@ -1,0 +1,50 @@
+    <script type="text/javascript" src="{{MEDIA_URL}}js/js/jquery.tablesorter.js"></script>
+    <script> 
+        $(document).ready(function(){
+            $("#errores").tablesorter();
+        });
+    </script>
+<table id="errores" class="tablesorter" border="1">
+<thead>
+<tr>
+    <th>Prioridad</th>
+    <th>Nombre del error</th>
+    <th>Tags</th>
+</tr>
+</thead>
+<tbody>
+{% if error_list %}
+    {% for error in error_list %}
+    <tr>
+        <td> {{ error.prioridad }} </td>
+        <td> {{ error.titulo }} </td>
+        <td> 
+            {% if error.tag_set.all %}
+                {% for tag in error.tag_set.all %}
+                    <a href="/tag/{{ tag.nombre }}/">{{ tag.nombre }}</a>
+                {% endfor %}
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+
+{% elif error_listu %}
+    {% for error in error_listu %}
+    <tr>
+        <td> {{ error.prioridad }} </td>
+        <td>{{ error.titulo }} </td>
+        <td> 
+            {% if error.tag_set.all %}
+                {% for tag in error.tag_set.all %}
+                    {{ tag.nombre }}
+                {% endfor %}
+            {% endif %}
+        </td> 
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+{% else %}
+    No hay errores
+{% endif %}

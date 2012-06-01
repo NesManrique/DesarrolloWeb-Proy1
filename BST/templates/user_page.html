@@ -2,14 +2,9 @@
 {% block title %}Bienvenido {{ username }}{% endblock %} 
 {% block head %}Cuenta de {{ username }}{% endblock %}
 {% block content %}
-{% if errors %}
-    <ul>
-        {% for error in errors %}
-          <p> {{ error.id }} Error encontrado para {{ error.usuario_encargado }}
-          </p>
-        {% endfor %}
-    </ul>
-{% else %}
-    No hay errores
-{% endif %}
+<div="operaciones">
+    <p><a href="/error/save/">Reportar error </a></p>
+    <p><a href="/error/list/{{ username }}">Listar errores del sistema<a/></p>
+    <p><a href="/error/listu/{{ username }}">Listar errores asignados<a/></p>
+</div>
 {% endblock %}

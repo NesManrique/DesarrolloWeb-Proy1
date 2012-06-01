@@ -31,11 +31,8 @@ def user_page(request, username):
         url = '/users/%s/' % request.user.username
         return HttpResponseRedirect(url)
 
-    errors = user.reportero.all()
-        
     variables = RequestContext(request, {
         'username': username,
-        'errors': errors
     })
 
     return render_to_response('user_page.html', variables)
@@ -61,9 +58,5 @@ def register_page(request):
         'form': form
     })
     
-    return render_to_response(
-        'registration/register.html',
-        variables
-    )
+    return render_to_response('registration/register.html', variables)
 
- 

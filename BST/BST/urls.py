@@ -2,10 +2,11 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.defaults import *
 from user_manager.views import *
 from error_manager.views import *
-from error_manager.models import Error
-from django.views.generic import DetailView
+from error_manager.models import *
+from django.views.generic import DetailView, ListView
 from django.views.generic.simple import direct_to_template
 from django.utils.encoding import force_unicode
+from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -24,12 +25,16 @@ urlpatterns = patterns('',
     url(r'^logout/$', user_logout),
     url(r'^registro/$', register_page),
     url(r'^registro/exitoso/$', direct_to_template, {'template': 'registration/registro_exitoso.html'}),
-    url(r'^save/$', error_save),
+    url(r'^error/save/$', error_save),
+    url(r'^error/save/exitoso/$', direct_to_template, {'template': 'error_save_exitoso.html'}),
     url(r'^error/(?P<pk>\d+)/$',
         DetailView.as_view(
             model=Error,
             template_name='error_detail.html')),
+    url(r'^error/list/(\w+)/$', ErrorsListView.as_view()) ,
+    url(r'^error/listu/(\w+)/$', error_list) ,
     url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^tag/([^\s]+)/$', tag_page),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -37,3 +42,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )
+
+urlpatterns += patterns('',
+    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+     'document_root': settings.MEDIA_ROOT}))

@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Registro de error Exitoso{% endblock %}
+{% block head %} Se ha almacenado el error{% endblock %}
+
+{% block content %}
+    <div>
+    <p></p><a href="/error/save/">Reportar Error</a></p> 
+    <p></p><a href="/error/list/{{ user.username }}">Listar errores del sistema</a></p>
+    <p></p><a href="/error/listu/{{ user.username }}">Listar errores asignados</a></p>
+    </div>
+{% endblock %}
