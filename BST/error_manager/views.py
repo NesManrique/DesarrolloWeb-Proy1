@@ -67,8 +67,16 @@ def asignar_enc(request, error_id):
 
 def asignar_estado(request, error_id):
     if request.method == 'POST':
-        estado = request.POST["estado"]
-        err = get_object_or_404(Error, id=error_id)
-        err.estado = estado
-        err.save()
-    return HttpResponseRedirect(reverse("error_detail", args=(error_id,)))
+        print "entre con post " + error_id
+        form = ErrorUpEstado(request.POST)
+        if form.is_valid():
+            err = get_object_or_404(Error, id=error_id)
+            err.estado = form.cleaned_data['Estado']
+            err.save()
+            return HttpResponseRedirect(reverse("error_detail", args=(error_id,)))
+    else:
+        print "entre con get"
+        form = ErrorUpEstado()
+    
+    variables = RequestContext(request, {'form' : form})
+    return render_to_response('error_detail.html',variables)
