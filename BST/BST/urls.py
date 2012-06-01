@@ -3,9 +3,11 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.defaults import *
 from user_manager.views import *
 from error_manager.views import *
-from error_manager.models import Error
+from error_manager.models import *
+from django.views.generic import DetailView, ListView
 from django.views.generic.simple import direct_to_template
 from django.utils.encoding import force_unicode
+from django.conf import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -18,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^users/',include('user_manager.urls')),
     url(r'^errors/',include('error_manager.urls')),
     url(r'^comments/', include('django.contrib.comments.urls')),
+    url(r'^tag/([^\s]+)/$', tag_page),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
