@@ -2,25 +2,9 @@
 {% block title %}Bienvenido {{ username }}{% endblock %} 
 {% block head %}Cuenta de {{ username }}{% endblock %}
 {% block content %}
-<!--div="operaciones">
-    <p><a href="/errors/save/">Reportar error </a></p>
-    <p><a href="/errors/list/{{ username }}">Listar errores del sistema<a/></p>
-    <p><a href="/errors/listu/{{ username }}">Listar errores asignados<a/></p>
-</div-->
-{% if errors %}
-    <ul>
-        {% for error in errors %}
-          <p> 
-                <a href="{% url error_detail error.id %}">{{ error.id }}</a> 
-                {% if error.usuario_encargado == None %}
-                    Sin asignar
-                {% else %}
-                    Error encontrado para {{ error.usuario_encargado }}
-                {% endif %}
-          </p>
-        {% endfor %}
-    </ul>
-{% else %}
-    No hay errores
-{% endif %}
+<div="operaciones">
+    <p><a href= {% url save_error %}>Reportar error </a></p>
+    <p><a href={% url system_errors %}>Listar errores del sistema<a/></p>
+    <p><a href={% url errors_user  username  %}>Listar errores asignados<a/></p>
+</div>
 {% endblock %}
