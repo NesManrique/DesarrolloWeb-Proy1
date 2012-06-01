@@ -2,11 +2,11 @@
 {% block title %}Bienvenido {{ username }}{% endblock %} 
 {% block head %}Cuenta de {{ username }}{% endblock %}
 {% block content %}
-<div="operaciones">
-    <p><a href="/error/save/">Reportar error </a></p>
-    <p><a href="/error/list/{{ username }}">Listar errores del sistema<a/></p>
-    <p><a href="/error/listu/{{ username }}">Listar errores asignados<a/></p>
-</div>
+<!--div="operaciones">
+    <p><a href="/errors/save/">Reportar error </a></p>
+    <p><a href="/errors/list/{{ username }}">Listar errores del sistema<a/></p>
+    <p><a href="/errors/listu/{{ username }}">Listar errores asignados<a/></p>
+</div-->
 {% if errors %}
     <ul>
         {% for error in errors %}
